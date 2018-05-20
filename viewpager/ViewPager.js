@@ -136,7 +136,7 @@ export default class ViewPager extends Component {
     _childrenWithOverridenStyle () {
         if (this.state.width === 0 || this.state.height === 0) return null
         return React.Children.map(this.props.children, (child) => {
-            if (!child)return null
+            if (!child) return null
             let newProps = {
                 ...child.props,
                 style: [child.props.style, {
@@ -146,13 +146,7 @@ export default class ViewPager extends Component {
                 }],
                 collapsable: false
             }
-            if (child.type &&
-                child.type.displayName &&
-                (child.type.displayName !== 'RCTView') &&
-                (child.type.displayName !== 'View')) {
-                console.warn('Each ViewPager child must be a <View>. Was ' + child.type.displayName)
-            }
-            return React.createElement(child.type, newProps)
+            return React.createElement(child.type, newProps, ...child.children)
         })
     }
 
